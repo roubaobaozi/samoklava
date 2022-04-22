@@ -1,4 +1,4 @@
-# panoshoko
+# won't work need to rewire it
 units:
   kx: U
   ky: U
@@ -70,15 +70,10 @@ points:
         ref: matrix_inner_bottom
         shift: [-2.8 kx, -1.6 ky]
       columns:
-        near:
-          spread: 1.1 kx
-          origin: [-0 kx, -0 ky]
-          key:
-            column_net: P18
         home:
           spread: 1.1 kx
           rotate: -12
-          origin: [-0.5 kx, -0.5 ky]
+          origin: [0 kx, -5.7 ky]
           key:
             column_net: P15
         far:
@@ -107,7 +102,7 @@ outlines:
             shift: [0.5 kx - 0.5px, 0.5 ky + 0.5 py]
           - ref: thumbfan_far_thumb
             shift: [0.7 kx, 0.55 ky]
-          - ref: thumbfan_near_thumb
+          - ref: thumbfan_home_thumb
             shift: [-0.5 kx, -0.5 ky - 0.5 py]
           - ref: matrix_pinky_bottom
             shift: [-4.5 px, -0.5 ky - 0.5 py]
@@ -188,7 +183,7 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_pinky_bottom
-            shift: [0.6 kx, -0.8 ky]
+            shift: [0.6 kx, -0.5 ky]
         radius: 1.05
       top_right:
         type: circle
@@ -206,7 +201,7 @@ outlines:
         type: circle
         anchor:
           - ref: thumbfan_far_thumb
-            shift: [-0.3 kx, -0.65 ky]
+            shift: [0 kx, -0.62 ky]
         radius: 1.05
     mounting_holes:
       $extends: outlines.exports.screw_holes
@@ -429,20 +424,20 @@ pcbs:
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -1 ky]
-          rotate: -35
+          shift: [1 kx, -1 ky]
+          rotate: -26
         params:
-          text: "panoshoko v0.1.0\\nby baobaozi"
+          text: "shayu v0.1.0\\nby baobaozi"
           justify: left
       info_r:
         type: text
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -1 ky]
-          rotate: -35
+          shift: [1 kx, -1 ky]
+          rotate: -28
         params:
           layer: B.SilkS
-          text: "panoshoko v0.1.0\\nby baobaozi"
+          text: "shayu v0.1.0\\nby baobaozi"
           justify: right mirror
 

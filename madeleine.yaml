@@ -1,4 +1,4 @@
-# panoshoko
+# madeleine
 units:
   kx: U
   ky: U
@@ -28,7 +28,7 @@ points:
   zones:
     matrix:
       # anchor:
-      rotate: 6
+      # rotate: 6
       key.padding: ky
       columns:
         pinky:
@@ -39,8 +39,8 @@ points:
         ring:
           stagger: 0.5 ky
           spread: kx
-          origin: [-12, -12]
-          rotate: -6
+          # origin: [-12, -12]
+          # rotate: -6
           key:
             column_net: P19
         middle:
@@ -182,7 +182,7 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_ring_home
-            shift: [-0.6 kx, 0.4 ky]
+            shift: [-0.5 kx, 0.7 ky]
         radius: 1.05
       bottom_left:
         type: circle
@@ -429,20 +429,20 @@ pcbs:
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -1 ky]
-          rotate: -35
+          shift: [1 kx, -1 ky]
+          rotate: -30
         params:
-          text: "panoshoko v0.1.0\\nby baobaozi"
+          text: "madeleine v0.1.0\\nby baobaozi"
           justify: left
       info_r:
         type: text
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -1 ky]
-          rotate: -35
+          shift: [1 kx, -1 ky]
+          rotate: -30
         params:
           layer: B.SilkS
-          text: "panoshoko v0.1.0\\nby baobaozi"
+          text: "madeleine v0.1.0\\nby baobaozi"
           justify: right mirror
 
