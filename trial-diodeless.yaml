@@ -1,97 +1,105 @@
-# panoshoko
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ergogen/ergogen/develop/meta/schema.json
 units:
-  kx: U
-  ky: U
+  kx: cx
+  ky: cy
   px: 2
   py: 2
 points:
   key:
     footprints:
-      mx:
-        type: mx
-        nets:
-          from: =colrow
-          to: =column_net
+      choc_hotswap:
+        type: choc
         params:
-          keycaps: true
+          hotswap: true
           reverse: true
-          hotswap: false
-      diode:
-        type: diode
+          keycaps: true
         nets:
-          # from: P3
-          # to: P4
-          from: =colrow
-          to: =row_net
-        anchor:
-          shift: [0, -8]
+          from: =column_net
+          to: GND
   zones:
     matrix:
       # anchor:
-      rotate: 6
+      #   rotate: 5
       key.padding: ky
       columns:
         pinky:
           stagger: 0 ky
           spread: kx
-          key:
-            column_net: P20
+          row_overrides:
+            bottom:
+              column_net: P21
+            home:
+              column_net: P20
+            top:
+              column_net: P19
         ring:
-          stagger: 0.5 ky
+          stagger: 0.7 ky
           spread: kx
-          origin: [-12, -12]
-          rotate: -6
-          key:
-            column_net: P19
+          row_overrides:
+            bottom:
+              column_net: P18
+            home:
+              column_net: P15
+            top:
+              column_net: P14
         middle:
-          stagger: 0.35 ky
+          stagger: 0.2 ky
           spread: kx
-          key:
-            column_net: P18
+          row_overrides:
+            bottom:
+              column_net: P16
+            home:
+              column_net: P10
+            top:
+              column_net: P9
         index:
-          stagger: -0.45 ky
+          stagger: -0.2 ky
           spread: kx
-          key:
-            column_net: P15
+          row_overrides:
+            bottom:
+              column_net: P8
+            home:
+              column_net: P7
+            top:
+              column_net: P6
         inner:
           stagger: -0.1 ky
           spread: kx
-          key:
-            column_net: P14
-      rows:
-        bottom:
-          row_net: P6
-        home:
-          row_net: P5
-        top:
-          row_net: P4
+          row_overrides:
+            bottom:
+              column_net: P5
+            home:
+              column_net: P4
+            top:
+              column_net: P3
     thumbfan:
       anchor:
         ref: matrix_inner_bottom
-        shift: [-2.8 kx, -1.1 ky]
+        shift: [-1.5 kx, -1 ky]
       columns:
         near:
-          spread: 1.1 kx
-          origin: [-0 kx, -0 ky]
-          key:
-            column_net: P18
-        home:
-          spread: 1.1 kx
-          rotate: -12
+          spread: kx
+          rotate: -15
           origin: [-0.5 kx, -0.5 ky]
           key:
-            column_net: P15
-        far:
-          spread: 1.1 kx
-          rotate: -102
-          origin: [0 kx, -0.13 ky]
+            column_net: P2
+        home:
+          spread: kx
+          rotate: -15
+          origin: [-0.5 kx, -0.5 ky]
           key:
-            column_net: P14
+            column_net: P0
+        far:
+          spread: kx
+          rotate: -15
+          origin: [-0.5 kx, -0.5 ky]
+          key:
+            column_net: P1
       rows:
         thumb:
-          row_net: P7
+          padding: 0
 outlines:
-  # board dimensions according to JLCPCB: 112.98 mm x 118.51 mm
+  # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
     raw:
       - type: keys
@@ -106,11 +114,11 @@ outlines:
           - ref: thumbfan_far_thumb
             shift: [0.5 kx - 0.5px, 0.5 ky + 0.5 py]
           - ref: thumbfan_far_thumb
-            shift: [0.7 kx, 0.55 ky]
+            shift: [0.5 kx - 0.5px, -0.5 ky - 0.5 py]
           - ref: thumbfan_near_thumb
-            shift: [-0.5 kx, -0.5 ky - 0.5 py]
+            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
           - ref: matrix_pinky_bottom
-            shift: [-4.5 px, -0.5 ky - 0.5 py]
+            shift: [0.5 kx - 0.5 py, -0.5 ky - 0.5 py]
           - ref: matrix_pinky_home
           - ref: matrix_inner_home
     patch_outer:
@@ -137,7 +145,7 @@ outlines:
         anchor:
           ref:
             - matrix_inner_top
-          shift: [0 kx, -3.62 ky]
+          shift: [0 kx, -4.05 ky]
         size: [32, 76.5]
         corner: px
     switches:
@@ -182,13 +190,13 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_ring_home
-            shift: [-0.6 kx, 0.4 ky]
+            shift: [-0.5 kx, 0 ky]
         radius: 1.05
       bottom_left:
         type: circle
         anchor:
           - ref: matrix_pinky_bottom
-            shift: [0.6 kx, -0.6 ky]
+            shift: [0.5 kx, 0]
         radius: 1.05
       top_right:
         type: circle
@@ -200,13 +208,13 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_index_bottom
-            shift: [-0.7 kx, -0.5 ky]
+            shift: [0, -1.06 ky]
         radius: 1.05
       thumb:
         type: circle
         anchor:
           - ref: thumbfan_far_thumb
-            shift: [-0.3 kx, -0.65 ky]
+            shift: [-0.55 kx, 0]
         radius: 1.05
     mounting_holes:
       $extends: outlines.exports.screw_holes
@@ -253,22 +261,22 @@ outlines:
         operation: subtract
 pcbs:
   top_plate:
-    # don’t include JLCJLCJLCJLC text somewhere
+    # include JLCJLCJLCJLC text somewhere
     include_keys: false
     outlines:
       edge:
         outline: plate
         layer: Edge.Cuts
-    # footprints:
-    #   jlc_order_number:
-    #     type: text
-    #     anchor:
-    #       ref:
-    #         - matrix_ring_home
-    #       shift: [-0.25 kx, 0.5 ky]
-    #     params:
-    #       text: "JLCJLCJLCJLC"
-    #       justify: left
+    footprints:
+      jlc_order_number:
+        type: text
+        anchor:
+          ref:
+            - matrix_ring_home
+          shift: [-0.25 kx, 0.5 ky]
+        params:
+          text: "JLCJLCJLCJLC"
+          justify: left
   bottom_plate:
     include_keys: false
     outlines:
@@ -285,85 +293,21 @@ pcbs:
       mcu_l:
         type: promicro
         params:
-          orientation: up
           batteryPins: true
         anchor:
           ref:
             - matrix_inner_top
           shift: [20, -11]
           rotate: 270
-      mcu_r:
-        type: promicro
-        params:
-          orientation: down
-          batteryPins: true
+      bat:
+        type: bat
+        nets: 
+          neg: GND
         anchor:
           ref:
             - matrix_inner_top
-          shift: [22.5, -12.25]
-          rotate: 270
-      pad_plus:
-        type: pad
-        anchor:
-          ref:
-            - matrix_inner_top
-          shift: [23, -18]
-          rotate: 0
-        params:
-          front: true
-          back: true
-          width: 1.5
-          height: 1.5
-          text: "B+"
-        nets:
-          net: Braw
-      pad_minus:
-        type: pad
-        anchor:
-          ref:
-            - matrix_inner_top
-          shift: [23, -15]
-          rotate: 0
-        params:
-          front: true
-          back: true
-          width: 1.5
-          height: 1.5
-          text: "B-"
-        nets:
-          net: Bminus
-      trrs_l:
-        type: trrs
-        anchor:
-          ref:
-            - matrix_inner_bottom
-          shift: [32, -15]
-          rotate: 270
-        params:
-          reverse: false
-          symmetric: false
-        # The naming of the nets on this footprint is different from the Corne schematics.
-        nets:
-          A: ""
-          B: VCC
-          C: GND
-          D: P0
-      trrs_r:
-        type: trrs
-        anchor:
-          ref:
-            - matrix_inner_bottom
-          shift: [32, -13]
-          rotate: 270
-        params:
-          reverse: true
-          symmetric: false
-        # The naming of the nets on this footprint is different from the Corne schematics.
-        nets:
-          A: ""
-          B: VCC
-          C: GND
-          D: P0
+          shift: [25, -30]
+          rotate: 90
       jumper_l:
         type: jumper
         anchor:
@@ -388,39 +332,27 @@ pcbs:
         nets:
           from: Braw
           to: Bplus
-      slider_l:
-        type: slider
+      slider:
+        type: pcm12
         anchor:
           ref:
             - matrix_inner_bottom
           shift: [30, 0]
           rotate: 270
         params:
-          side: F
-        nets:
-          from: Braw
-          to: Bplus
-      slider_r:
-        type: slider
-        anchor:
-          ref:
-            - matrix_inner_bottom
-          shift: [30, 0]
-          rotate: 270
-        params:
-          side: B
+          reverse: true
         nets:
           from: Braw
           to: Bplus
       reset:
-        type: button
+        type: b3u1000p
         anchor:
           ref:
             - matrix_inner_bottom
           shift: [17, 0]
           rotate: 270
         params:
-          variant: 2_pin_th
+          reverse: true
         nets:
           from: GND
           to: RST
@@ -429,20 +361,17 @@ pcbs:
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -0.7 ky]
-          rotate: -24
+          shift: [0.75 kx, 0]
         params:
-          text: "panoshoko v0.2.0\\nby baobaozi"
+          text: "samoklava sweep based on:\\nsamoklava v0.1\\nby soundmonster"
           justify: left
       info_r:
         type: text
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -0.7 ky]
-          rotate: -24
+          shift: [0.75 kx, 0]
         params:
           layer: B.SilkS
-          text: "panoshoko v0.2.0\\nby baobaozi"
+          text: "samoklava sweep based on:\\nsamoklava v0.1\\nby soundmonster"
           justify: right mirror
-
