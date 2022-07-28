@@ -211,15 +211,15 @@ outlines:
     mounting_holes:
       $extends: outlines.exports.screw_holes
       top_left:
-        radius: 2.05
+        radius: 1.05 # standoffs through PCB = 2.05
       bottom_left:
-        radius: 2.05
+        radius: 1.05
       top_right:
-        radius: 2.05
+        radius: 1.05
       palm:
-        radius: 2.05
+        radius: 1.05
       thumb:
-        radius: 2.05
+        radius: 1.05
     bottom_outline:
       main:
         type: outline
@@ -254,7 +254,7 @@ outlines:
 pcbs:
   top_plate:
     # don’t include JLCJLCJLCJLC text somewhere
-    include_keys: false
+    # include_keys: false
     outlines:
       edge:
         outline: plate
@@ -270,7 +270,7 @@ pcbs:
     #       text: "JLCJLCJLCJLC"
     #       justify: left
   bottom_plate:
-    include_keys: false
+    # include_keys: false
     outlines:
       edge:
         outline: bottom_outline
@@ -432,7 +432,7 @@ pcbs:
           shift: [0.9 kx, -0.7 ky]
           rotate: -24
         params:
-          text: "panoshoko v0.2.0\\nby baobaozi"
+          text: "panoshoko v0.2.1\\nby baobaozi"
           justify: left
       info_r:
         type: text
@@ -443,6 +443,6 @@ pcbs:
           rotate: -24
         params:
           layer: B.SilkS
-          text: "panoshoko v0.2.0\\nby baobaozi"
+          text: "panoshoko v0.2.1\\nby baobaozi"
           justify: right mirror
 
