@@ -206,7 +206,7 @@ outlines:
         type: circle
         anchor:
           - ref: thumbfan_far_thumb
-            shift: [-0.3 kx, -0.65 ky]
+            shift: [-0.6 kx, -0.7 ky]
         radius: 1.05
     mounting_holes:
       $extends: outlines.exports.screw_holes
