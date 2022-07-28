@@ -15,7 +15,7 @@ points:
         params:
           keycaps: true
           reverse: true
-          hotswap: false
+          hotswap: true
       diode:
         type: diode
         nets:
