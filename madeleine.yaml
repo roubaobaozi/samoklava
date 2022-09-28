@@ -1,4 +1,4 @@
-# panoshoko
+# madeleine
 units:
   kx: U
   ky: U
@@ -15,7 +15,7 @@ points:
         params:
           keycaps: true
           reverse: true
-          hotswap: true
+          hotswap: false
       diode:
         type: diode
         nets:
@@ -24,11 +24,11 @@ points:
           from: =colrow
           to: =row_net
         anchor:
-          shift: [0, -8]
+          shift: [0, -5]
   zones:
     matrix:
       # anchor:
-      rotate: 6
+      # rotate: 6
       key.padding: ky
       columns:
         pinky:
@@ -39,8 +39,8 @@ points:
         ring:
           stagger: 0.5 ky
           spread: kx
-          origin: [-12, -12]
-          rotate: -6
+          # origin: [-12, -12]
+          # rotate: -6
           key:
             column_net: P19
         middle:
@@ -68,7 +68,7 @@ points:
     thumbfan:
       anchor:
         ref: matrix_inner_bottom
-        shift: [-2.8 kx, -1.1 ky]
+        shift: [-2.8 kx, -1.6 ky]
       columns:
         near:
           spread: 1.1 kx
@@ -91,6 +91,7 @@ points:
         thumb:
           row_net: P7
 outlines:
+  # board dimensions according to JLCPCB: 112.98 mm x 118.51 mm
   exports:
     raw:
       - type: keys
@@ -130,15 +131,6 @@ outlines:
             shift: [0.5 (kx + px), 0]
           - ref: matrix_index_bottom
           - ref: matrix_index_top
-    patch_lower:
-      - type: rectangle
-        anchor:
-          ref:
-            - matrix_pinky_top
-          shift: [-0.88 kx, -2.57 ky]
-          rotate: -6
-        size: [15, 60]
-        corner: px
     controller_area:
       main:
         type: rectangle
@@ -146,7 +138,6 @@ outlines:
           ref:
             - matrix_inner_top
           shift: [0 kx, -3.62 ky]
-          # shift: [0 kx, -4.05 ky] # maybe?
         size: [32, 76.5]
         corner: px
     switches:
@@ -174,10 +165,6 @@ outlines:
         type: outline
         name: patch_outer
         operation: add
-      patch_lower:
-        type: outline
-        name: patch_lower
-        operation: add
       thumbfan_glue:
         type: outline
         name: thumbfan_glue
@@ -195,13 +182,13 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_ring_home
-            shift: [-0.6 kx, 0.4 ky]
+            shift: [-0.5 kx, 0.7 ky]
         radius: 1.05
       bottom_left:
         type: circle
         anchor:
           - ref: matrix_pinky_bottom
-            shift: [0.6 kx, -0.6 ky]
+            shift: [0.6 kx, -0.8 ky]
         radius: 1.05
       top_right:
         type: circle
@@ -213,26 +200,26 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_index_bottom
-            shift: [-0.7 kx, -0.5 ky]
+            shift: [-0.5 kx, -0.9 ky]
         radius: 1.05
       thumb:
         type: circle
         anchor:
           - ref: thumbfan_far_thumb
-            shift: [-0.6 kx, -0.7 ky]
+            shift: [-0.3 kx, -0.65 ky]
         radius: 1.05
     mounting_holes:
       $extends: outlines.exports.screw_holes
       top_left:
-        radius: 1.05 # standoffs through PCB = 2.05
+        radius: 2.05
       bottom_left:
-        radius: 1.05
+        radius: 2.05
       top_right:
-        radius: 1.05
+        radius: 2.05
       palm:
-        radius: 1.05
+        radius: 2.05
       thumb:
-        radius: 1.05
+        radius: 2.05
     bottom_outline:
       main:
         type: outline
@@ -293,11 +280,13 @@ pcbs:
       edge:
         outline: pcb
         layer: Edge.Cuts
+        # TODO there's a way to add stuff to the silkscreen layer
     footprints:
       mcu_l:
         type: promicro
         params:
           orientation: up
+          batteryPins: true
         anchor:
           ref:
             - matrix_inner_top
@@ -307,6 +296,7 @@ pcbs:
         type: promicro
         params:
           orientation: down
+          batteryPins: true
         anchor:
           ref:
             - matrix_inner_top
@@ -317,7 +307,7 @@ pcbs:
         anchor:
           ref:
             - matrix_inner_top
-          shift: [23, -6]
+          shift: [23, -18]
           rotate: 0
         params:
           front: true
@@ -326,13 +316,13 @@ pcbs:
           height: 1.5
           text: "B+"
         nets:
-          net: Bplus
+          net: Braw
       pad_minus:
         type: pad
         anchor:
           ref:
             - matrix_inner_top
-          shift: [23, -3]
+          shift: [23, -15]
           rotate: 0
         params:
           front: true
@@ -341,7 +331,7 @@ pcbs:
           height: 1.5
           text: "B-"
         nets:
-          net: GND
+          net: Bminus
       trrs_l:
         type: trrs
         anchor:
@@ -384,8 +374,8 @@ pcbs:
         params:
           side: B
         nets:
-          from: Bplus
-          to: RAW
+          from: Braw
+          to: Bplus
       jumper_r:
         type: jumper
         anchor:
@@ -396,8 +386,8 @@ pcbs:
         params:
           side: F
         nets:
-          from: Bplus
-          to: RAW
+          from: Braw
+          to: Bplus
       slider_l:
         type: slider
         anchor:
@@ -408,9 +398,8 @@ pcbs:
         params:
           side: F
         nets:
-          from: RAW
-          left: Bplus
-          right: ''
+          from: Braw
+          to: Bplus
       slider_r:
         type: slider
         anchor:
@@ -421,9 +410,8 @@ pcbs:
         params:
           side: B
         nets:
-          from: RAW
-          left: ''
-          right: Bplus
+          from: Braw
+          to: Bplus
       reset:
         type: button
         anchor:
@@ -441,20 +429,20 @@ pcbs:
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -0.7 ky]
-          rotate: -24
+          shift: [1 kx, -1 ky]
+          rotate: -30
         params:
-          text: "panoshoko v0.2.2\\nby baobaozi"
+          text: "madeleine v0.1.0\\nby baobaozi"
           justify: left
       info_r:
         type: text
         anchor:
           ref:
             - matrix_pinky_bottom
-          shift: [0.9 kx, -0.7 ky]
-          rotate: -24
+          shift: [1 kx, -1 ky]
+          rotate: -30
         params:
           layer: B.SilkS
-          text: "panoshoko v0.2.2\\nby baobaozi"
+          text: "madeleine v0.1.0\\nby baobaozi"
           justify: right mirror
 
