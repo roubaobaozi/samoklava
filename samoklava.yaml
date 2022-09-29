@@ -312,6 +312,16 @@ pcbs:
             - matrix_inner_top
           shift: [22.5, -12.25]
           rotate: 270
+      oled:
+        type: oled
+        anchor:
+          ref:
+            - matrix_inner_bottom
+          shift: [-6, 6]
+          rotate: 90
+        nets:
+          SDA: D1
+          SCL: D0
       pad_plus:
         type: pad
         anchor:
