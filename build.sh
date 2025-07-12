@@ -2,7 +2,7 @@
 
 # container_cmd=podman
 container_cmd=docker
-container_args="-w /board -v $(pwd):/board --rm"
+container_args="--platform linux/amd64 -w /board -v $(pwd):/board --rm"
 # use this if having issues with M1 mac not running it. Intel worked without --platform though
 # container_args="--platform linux/amd64 -w /board -v $(pwd):/board --rm"
 
